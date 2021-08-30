@@ -8,7 +8,16 @@ public class PlayWallScript : MonoBehaviour
     public string color;
     public float forceMultipier = 5;
     public Text scoreText;
+
     private int score = 0;
+    private ContrillerScript contrillerScript;
+    private GameManagerScript gmScript;
+    private void Start()
+    {
+        contrillerScript = FindObjectOfType<ContrillerScript>();
+        gmScript = FindObjectOfType<GameManagerScript>();
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,11 +27,12 @@ public class PlayWallScript : MonoBehaviour
             Destroy(other.gameObject);
             score++;
             scoreText.text = score.ToString();
+            gmScript.cubeDestoyed();
         }
         else
         {
             other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(1,0) * forceMultipier;
-            FindObjectOfType<ContrillerScript>().Reject();
+            contrillerScript.Reject();
         }
     }
 }
