@@ -13,15 +13,6 @@ public class SpawnerScript : MonoBehaviour
         for (int i = 0; i<5; i++) SpawnCube(i);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.R))
-        {
-            SpawnCube(1);
-        }
-    }
-
     private void SpawnCube(float yOffset)
     {
         GameObject newCube = Instantiate(spawnObject, transform.position + 

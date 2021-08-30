@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayWallScript : MonoBehaviour
 {
     public string color;
     public float forceMultipier = 5;
+    public Text scoreText;
+    private int score = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +16,8 @@ public class PlayWallScript : MonoBehaviour
         if (other.CompareTag(color))
         {
             Destroy(other.gameObject);
-            //add score
+            score++;
+            scoreText.text = score.ToString();
         }
         else
         {
