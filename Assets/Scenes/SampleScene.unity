@@ -798,6 +798,8 @@ MonoBehaviour:
   color: Player
   forceMultipier: 0
   scoreText: {fileID: 0}
+  controllerObject: {fileID: 0}
+  gameManagerObject: {fileID: 0}
 --- !u!65 &791579368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -923,6 +925,8 @@ MonoBehaviour:
   color: Blue
   forceMultipier: 2
   scoreText: {fileID: 1089348456}
+  controllerObject: {fileID: 574944680}
+  gameManagerObject: {fileID: 865915357}
 --- !u!65 &822039295
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1254,6 +1258,8 @@ MonoBehaviour:
   color: Red
   forceMultipier: -2
   scoreText: {fileID: 174227107}
+  controllerObject: {fileID: 574944680}
+  gameManagerObject: {fileID: 865915357}
 --- !u!65 &1004786895
 BoxCollider:
   m_ObjectHideFlags: 0
