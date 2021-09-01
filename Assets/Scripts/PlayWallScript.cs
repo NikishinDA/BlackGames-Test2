@@ -1,19 +1,19 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayWallScript : MonoBehaviour
 {
-    public string color;//цвет стены
-    public float forceMultipier = 5;//множетель и направление силы отскока
-    public Text scoreText;//текст счёта
-    public GameObject controllerObject;//объект с управдением
-    public GameObject gameManagerObject;//объект менеджера
+    public string color;//С†РІРµС‚ СЃС‚РµРЅС‹
+    public float forceMultipier = 5;//РјРЅРѕР¶РµС‚РµР»СЊ Рё РЅР°РїСЂР°РІР»РµРЅРёРµ СЃРёР»С‹ РѕС‚СЃРєРѕРєР°
+    public Text scoreText;//С‚РµРєСЃС‚ СЃС‡С‘С‚Р°
+    public GameObject controllerObject;//РѕР±СЉРµРєС‚ СЃ СѓРїСЂР°РІРґРµРЅРёРµРј
+    public GameObject gameManagerObject;//РѕР±СЉРµРєС‚ РјРµРЅРµРґР¶РµСЂР°
 
-    private int score = 0;//счёт
-    private ContrillerScript contrillerScript;//скрипт управления
-    private GameManagerScript gmScript;//скрипт менеджера
+    private int score = 0;//СЃС‡С‘С‚
+    private ContrillerScript contrillerScript;//СЃРєСЂРёРїС‚ СѓРїСЂР°РІР»РµРЅРёСЏ
+    private GameManagerScript gmScript;//СЃРєСЂРёРїС‚ РјРµРЅРµРґР¶РµСЂР°
     private void Start()
     {
         contrillerScript = controllerObject.GetComponent<ContrillerScript>();
@@ -21,19 +21,19 @@ public class PlayWallScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)//при попадании в тригер объекта
+    private void OnTriggerEnter(Collider other)//РїСЂРё РїРѕРїР°РґР°РЅРёРё РІ С‚СЂРёРіРµСЂ РѕР±СЉРµРєС‚Р°
     {
-        if (other.CompareTag(color))//если он того же цвета
+        if (other.CompareTag(color))//РµСЃР»Рё РѕРЅ С‚РѕРіРѕ Р¶Рµ С†РІРµС‚Р°
         {
-            Destroy(other.gameObject);//уничтожить
-            score++;//прибавить счёт
-            scoreText.text = score.ToString();//вывести на экран
-            gmScript.cubeDestoyed();//сообщить менеджеру
+            Destroy(other.gameObject);//СѓРЅРёС‡С‚РѕР¶РёС‚СЊ
+            score++;//РїСЂРёР±Р°РІРёС‚СЊ СЃС‡С‘С‚
+            scoreText.text = score.ToString();//РІС‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ
+            gmScript.cubeDestoyed();//СЃРѕРѕР±С‰РёС‚СЊ РјРµРЅРµРґР¶РµСЂСѓ
         }
-        else//если другого цвета
+        else//РµСЃР»Рё РґСЂСѓРіРѕРіРѕ С†РІРµС‚Р°
         {
-            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(1,0) * forceMultipier;//оттянуть куб
-            contrillerScript.Reject();//отобрать управление
+            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(1,0) * forceMultipier;//РѕС‚С‚СЏРЅСѓС‚СЊ РєСѓР±
+            contrillerScript.Reject();//РѕС‚РѕР±СЂР°С‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ
         }
     }
 }

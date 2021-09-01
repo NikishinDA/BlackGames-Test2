@@ -1,23 +1,23 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    private int cubeNumber = 5;//число кубов на полу
+    private int cubeNumber = 5;//С‡РёСЃР»Рѕ РєСѓР±РѕРІ РЅР° РїРѕР»Сѓ
 
-    public GameObject restartUI;//UI для рестарта (деактивирован)
+    public GameObject restartUI;//UI РґР»СЏ СЂРµСЃС‚Р°СЂС‚Р° (РґРµР°РєС‚РёРІРёСЂРѕРІР°РЅ)
 
     void Update()
     {
-        if (cubeNumber == 0)//если больше кубов нет
+        if (cubeNumber == 0)//РµСЃР»Рё Р±РѕР»СЊС€Рµ РєСѓР±РѕРІ РЅРµС‚
         {
-            restartUI.SetActive(true);//показать рестарт кнопку
+            restartUI.SetActive(true);//РїРѕРєР°Р·Р°С‚СЊ СЂРµСЃС‚Р°СЂС‚ РєРЅРѕРїРєСѓ
         }
     }
 
-    public void cubeDestoyed()//когда куб уничтожается
+    public void cubeDestoyed()//РєРѕРіРґР° РєСѓР± СѓРЅРёС‡С‚РѕР¶Р°РµС‚СЃСЏ
     {
-        cubeNumber--;//уменьшить число кубов
+        cubeNumber--;//СѓРјРµРЅСЊС€РёС‚СЊ С‡РёСЃР»Рѕ РєСѓР±РѕРІ
     }
 }
