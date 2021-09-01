@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    private int cubeNumber = 5;
+    private int cubeNumber = 5;//число кубов на полу
 
-    public GameObject restartUI;
-    void Start()
-    {
-        
-    }
+    public GameObject restartUI;//UI для рестарта (деактивирован)
 
-    // Update is called once per frame
     void Update()
     {
-        if (cubeNumber == 0)
+        if (cubeNumber == 0)//если больше кубов нет
         {
-            restartUI.SetActive(true);
+            restartUI.SetActive(true);//показать рестарт кнопку
         }
     }
 
-    public void cubeDestoyed()
+    public void cubeDestoyed()//когда куб уничтожается
     {
-        cubeNumber--;
+        cubeNumber--;//уменьшить число кубов
     }
 }

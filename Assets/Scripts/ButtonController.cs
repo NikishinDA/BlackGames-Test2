@@ -7,7 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);//перегружает текущую сцену
     }
     
 }

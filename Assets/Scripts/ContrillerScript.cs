@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ContrillerScript : MonoBehaviour
 {
-    private GameObject go;
-    private Vector3 screenSpace;
-    private bool isDrage = false;
-    private bool lostControl = false;
-    private float timeout;
+    private GameObject go;//управляемый объект
+    private Vector3 screenSpace;//проецируемая позиция объекта на экран
+    private bool isDrag = false;//тащим ли объект
+    private bool lostControl = false;//потеряли ли управление
+    private float timeout;//время до того, как сможем снова тащить куб
     public float cooldown = 2.0f;
 
 
@@ -21,48 +21,48 @@ public class ContrillerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!lostControl)
+        if (!lostControl)//если управление не потеряно
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
-            if (isDrage == false)
+            if (isDrag == false)//если не тащим
             {
-                if (Physics.Raycast(ray, out hitInfo))
+                if (Physics.Raycast(ray, out hitInfo))//стреляем лучом
                 {
                     Debug.DrawLine(ray.origin, hitInfo.point);
-                    go = hitInfo.collider.gameObject;
-                    screenSpace = Camera.main.WorldToScreenPoint(go.transform.position);
+                    go = hitInfo.collider.gameObject;//выбираем объект, в который попал луч
+                    screenSpace = Camera.main.WorldToScreenPoint(go.transform.position);//проецируем на экран
                 }
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))//если нажали кнопку мыши 
             {
-                Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenSpace.z);
-                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace);
-                if (go != null)
+                Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenSpace.z);//позиция мыши
+                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace);//проецируем в мир
+                if (go != null)//если объект выбран
                 {
-                    go.transform.position = new Vector3(currentPosition.x, currentPosition.y);
+                    go.transform.position = new Vector3(currentPosition.x, currentPosition.y);//изменять его позицию в соотвествии проецируемой позиции мыши
                 }
-                isDrage = true;
+                isDrag = true;//тащим
             }
-            else
+            else//если кнопка мыши не нажата
             {
-                isDrage = false;
-                go = null;
+                isDrag = false;//не тащим
+                go = null;//объект не выбран
             }
         }
         else
-        {
-            go = null;
-            timeout -= Time.deltaTime;
+        {//если потеряли контроль
+            go = null;//теряем объект
+            timeout -= Time.deltaTime;//ждём время
             if (timeout <= 0)
-            {
-                lostControl = false;
-                timeout = cooldown;
+            {//когда время истекает
+                lostControl = false;//можем снова управлять
+                timeout = cooldown;//обновляем таймер
             }
         }
     }
 
-    public void Reject()
+    public void Reject()//теряем управление над кубом
     {
         lostControl = true;
     }
