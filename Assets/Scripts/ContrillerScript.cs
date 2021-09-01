@@ -1,14 +1,14 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ContrillerScript : MonoBehaviour
 {
-    private GameObject go;//управляемый объект
-    private Vector3 screenSpace;//проецируемая позиция объекта на экран
-    private bool isDrag = false;//тащим ли объект
-    private bool lostControl = false;//потеряли ли управление
-    private float timeout;//время до того, как сможем снова тащить куб
+    private GameObject go;//СѓРїСЂР°РІР»СЏРµРјС‹Р№ РѕР±СЉРµРєС‚
+    private Vector3 screenSpace;//РїСЂРѕРµС†РёСЂСѓРµРјР°СЏ РїРѕР·РёС†РёСЏ РѕР±СЉРµРєС‚Р° РЅР° СЌРєСЂР°РЅ
+    private bool isDrag = false;//С‚Р°С‰РёРј Р»Рё РѕР±СЉРµРєС‚
+    private bool lostControl = false;//РїРѕС‚РµСЂСЏР»Рё Р»Рё СѓРїСЂР°РІР»РµРЅРёРµ
+    private float timeout;//РІСЂРµРјСЏ РґРѕ С‚РѕРіРѕ, РєР°Рє СЃРјРѕР¶РµРј СЃРЅРѕРІР° С‚Р°С‰РёС‚СЊ РєСѓР±
     public float cooldown = 2.0f;
 
 
@@ -21,48 +21,48 @@ public class ContrillerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!lostControl)//если управление не потеряно
+        if (!lostControl)//РµСЃР»Рё СѓРїСЂР°РІР»РµРЅРёРµ РЅРµ РїРѕС‚РµСЂСЏРЅРѕ
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
-            if (isDrag == false)//если не тащим
+            if (isDrag == false)//РµСЃР»Рё РЅРµ С‚Р°С‰РёРј
             {
-                if (Physics.Raycast(ray, out hitInfo))//стреляем лучом
+                if (Physics.Raycast(ray, out hitInfo))//СЃС‚СЂРµР»СЏРµРј Р»СѓС‡РѕРј
                 {
                     Debug.DrawLine(ray.origin, hitInfo.point);
-                    go = hitInfo.collider.gameObject;//выбираем объект, в который попал луч
-                    screenSpace = Camera.main.WorldToScreenPoint(go.transform.position);//проецируем на экран
+                    go = hitInfo.collider.gameObject;//РІС‹Р±РёСЂР°РµРј РѕР±СЉРµРєС‚, РІ РєРѕС‚РѕСЂС‹Р№ РїРѕРїР°Р» Р»СѓС‡
+                    screenSpace = Camera.main.WorldToScreenPoint(go.transform.position);//РїСЂРѕРµС†РёСЂСѓРµРј РЅР° СЌРєСЂР°РЅ
                 }
             }
-            if (Input.GetMouseButton(0))//если нажали кнопку мыши 
+            if (Input.GetMouseButton(0))//РµСЃР»Рё РЅР°Р¶Р°Р»Рё РєРЅРѕРїРєСѓ РјС‹С€Рё 
             {
-                Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenSpace.z);//позиция мыши
-                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace);//проецируем в мир
-                if (go != null)//если объект выбран
+                Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenSpace.z);//РїРѕР·РёС†РёСЏ РјС‹С€Рё
+                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace);//РїСЂРѕРµС†РёСЂСѓРµРј РІ РјРёСЂ
+                if (go != null)//РµСЃР»Рё РѕР±СЉРµРєС‚ РІС‹Р±СЂР°РЅ
                 {
-                    go.transform.position = new Vector3(currentPosition.x, currentPosition.y);//изменять его позицию в соотвествии проецируемой позиции мыши
+                    go.transform.position = new Vector3(currentPosition.x, currentPosition.y);//РёР·РјРµРЅСЏС‚СЊ РµРіРѕ РїРѕР·РёС†РёСЋ РІ СЃРѕРѕС‚РІРµСЃС‚РІРёРё РїСЂРѕРµС†РёСЂСѓРµРјРѕР№ РїРѕР·РёС†РёРё РјС‹С€Рё
                 }
-                isDrag = true;//тащим
+                isDrag = true;//С‚Р°С‰РёРј
             }
-            else//если кнопка мыши не нажата
+            else//РµСЃР»Рё РєРЅРѕРїРєР° РјС‹С€Рё РЅРµ РЅР°Р¶Р°С‚Р°
             {
-                isDrag = false;//не тащим
-                go = null;//объект не выбран
+                isDrag = false;//РЅРµ С‚Р°С‰РёРј
+                go = null;//РѕР±СЉРµРєС‚ РЅРµ РІС‹Р±СЂР°РЅ
             }
         }
         else
-        {//если потеряли контроль
-            go = null;//теряем объект
-            timeout -= Time.deltaTime;//ждём время
+        {//РµСЃР»Рё РїРѕС‚РµСЂСЏР»Рё РєРѕРЅС‚СЂРѕР»СЊ
+            go = null;//С‚РµСЂСЏРµРј РѕР±СЉРµРєС‚
+            timeout -= Time.deltaTime;//Р¶РґС‘Рј РІСЂРµРјСЏ
             if (timeout <= 0)
-            {//когда время истекает
-                lostControl = false;//можем снова управлять
-                timeout = cooldown;//обновляем таймер
+            {//РєРѕРіРґР° РІСЂРµРјСЏ РёСЃС‚РµРєР°РµС‚
+                lostControl = false;//РјРѕР¶РµРј СЃРЅРѕРІР° СѓРїСЂР°РІР»СЏС‚СЊ
+                timeout = cooldown;//РѕР±РЅРѕРІР»СЏРµРј С‚Р°Р№РјРµСЂ
             }
         }
     }
 
-    public void Reject()//теряем управление над кубом
+    public void Reject()//С‚РµСЂСЏРµРј СѓРїСЂР°РІР»РµРЅРёРµ РЅР°Рґ РєСѓР±РѕРј
     {
         lostControl = true;
     }

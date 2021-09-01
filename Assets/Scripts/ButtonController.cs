@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);//перегружает текущую сцену
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);//РїРµСЂРµРіСЂСѓР¶Р°РµС‚ С‚РµРєСѓС‰СѓСЋ СЃС†РµРЅСѓ
     }
     
 }

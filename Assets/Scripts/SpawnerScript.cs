@@ -1,23 +1,23 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnerScript : MonoBehaviour
 {
-    public GameObject spawnObject;//что спаунить
+    public GameObject spawnObject;//С‡С‚Рѕ СЃРїР°СѓРЅРёС‚СЊ
 
-    public float offsetMultiplier = 2f;//множетель разброса
+    public float offsetMultiplier = 2f;//РјРЅРѕР¶РµС‚РµР»СЊ СЂР°Р·Р±СЂРѕСЃР°
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i<5; i++) SpawnCube(i);//заспаунить пять кубов
+        for (int i = 0; i<5; i++) SpawnCube(i);//Р·Р°СЃРїР°СѓРЅРёС‚СЊ РїСЏС‚СЊ РєСѓР±РѕРІ
     }
 
     private void SpawnCube(float yOffset)
     {
         GameObject newCube = Instantiate(spawnObject, transform.position + 
-            new Vector3(offsetMultiplier*(Random.value-0.5f),yOffset, offsetMultiplier*(Random.value-0.5f)), Quaternion.identity);//заспаунить куб в случайной точке (x,z) с заданным y
-        if (Random.value < 0.5f)//случайный выбор цвета 
+            new Vector3(offsetMultiplier*(Random.value-0.5f),yOffset, offsetMultiplier*(Random.value-0.5f)), Quaternion.identity);//Р·Р°СЃРїР°СѓРЅРёС‚СЊ РєСѓР± РІ СЃР»СѓС‡Р°Р№РЅРѕР№ С‚РѕС‡РєРµ (x,z) СЃ Р·Р°РґР°РЅРЅС‹Рј y
+        if (Random.value < 0.5f)//СЃР»СѓС‡Р°Р№РЅС‹Р№ РІС‹Р±РѕСЂ С†РІРµС‚Р° 
         {
             newCube.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
             newCube.tag = "Red";
